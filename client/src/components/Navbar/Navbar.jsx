@@ -17,9 +17,6 @@ function Navbar() {
         <NavLink to="/suppliers" className="header__nav--link">
           Suppliers
         </NavLink>
-        <NavLink to="/users" className="header__nav--link">
-          Users
-        </NavLink>
       </nav>
     </header>
   );
