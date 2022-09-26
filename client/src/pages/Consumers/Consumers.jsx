@@ -6,6 +6,7 @@ import Create from './Create';
 import List from './List';
 
 function Consumers() {
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [consumers, setConsumers] = useState(null);
   const [createConsumer, setCreateConsumer] = useState(null);
 
@@ -21,6 +22,7 @@ function Consumers() {
     axios
       .post('http://localhost:4000/consumers', createConsumer)
       .then((response) => {
+        setLastUpdate(Date.now());
         setCreateConsumer(null);
       })
       .catch((error) => alert(error.message));

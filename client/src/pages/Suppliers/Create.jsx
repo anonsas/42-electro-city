@@ -9,15 +9,13 @@ function Create() {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-
     if (!name || !priceKW) return alert('Please fill in the blanks');
 
-    const createData = {
-      name,
-      priceKW,
-    };
-
+    const createData = { name, priceKW };
     setCreateSupplier(createData);
+
+    setName('');
+    setPriceKW('');
   };
 
   return (

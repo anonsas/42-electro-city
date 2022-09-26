@@ -44,6 +44,17 @@ app.post('/suppliers', (req, res) => {
   });
 });
 
+app.delete('/suppliers/:id', (req, res) => {
+  const sql = `
+  DELETE FROM suppliers
+  WHERE id=?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 //===================
 //consumers
 app.get('/consumers', (req, res) => {

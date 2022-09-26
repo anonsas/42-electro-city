@@ -6,28 +6,42 @@ import Create from './Create';
 import List from './List';
 
 function Suppliers() {
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [suppliers, setSuppliers] = useState(null);
   const [createSupplier, setCreateSupplier] = useState(null);
+  const [deleteSupplier, setDeleteSupplier] = useState(null);
 
   useEffect(() => {
     axios
       .get('http://localhost:4000/suppliers')
       .then((response) => setSuppliers(response.data))
       .catch((error) => alert(error.message));
-  }, []);
+  }, [lastUpdate]);
 
   useEffect(() => {
     if (createSupplier === null) return;
     axios
       .post('http://localhost:4000/suppliers', createSupplier)
       .then((response) => {
+        setLastUpdate(Date.now());
         setCreateSupplier(null);
       })
       .catch((error) => alert(error.message));
   }, [createSupplier]);
 
+  useEffect(() => {
+    if (deleteSupplier === null) return;
+    axios
+      .delete(`http://localhost:4000/suppliers/${deleteSupplier.id}`)
+      .then((response) => {
+        setLastUpdate(Date.now());
+        setDeleteSupplier(null);
+      })
+      .catch((error) => alert(error.message));
+  }, [deleteSupplier]);
+
   return (
-    <SupplierContext.Provider value={{ suppliers, setCreateSupplier }}>
+    <SupplierContext.Provider value={{ suppliers, setCreateSupplier, setDeleteSupplier }}>
       <Create />
       <List />
     </SupplierContext.Provider>
