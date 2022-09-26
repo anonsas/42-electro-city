@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import ConsumerContext from '../../contexts/ConsumerContext';
 
 function Create() {
+  const { setCreateConsumer } = useContext(ConsumerContext);
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [electricityNum, setElectricityNum] = useState('');
@@ -12,11 +13,20 @@ function Create() {
 
     if (!name || !surname || !electricityNum || !supplier)
       return alert('Please fill in the blanks');
+
+    const createData = {
+      name,
+      surname,
+      electricityNum,
+      supplier,
+    };
+
+    setCreateConsumer(createData);
   };
 
   return (
     <form>
-      <h5>New Payment</h5>
+      <h2>New Payment</h2>
       <div>
         {/* NAME */}
         <div>
@@ -26,7 +36,8 @@ function Create() {
             id="name"
             className=""
             value={name}
-            autoComplete={false}
+            onChange={(e) => setName(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>
@@ -39,7 +50,8 @@ function Create() {
             id="surname"
             className=""
             value={surname}
-            autoComplete={false}
+            onChange={(e) => setSurname(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>
@@ -52,7 +64,8 @@ function Create() {
             id="enumber"
             className=""
             value={electricityNum}
-            autoComplete={false}
+            onChange={(e) => setElectricityNum(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>
@@ -65,7 +78,8 @@ function Create() {
             id="supplier"
             className=""
             value={supplier}
-            autoComplete={false}
+            onChange={(e) => setSupplier(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>

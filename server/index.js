@@ -22,6 +22,30 @@ const con = mysql.createConnection({
 //===================================
 
 // ROUTES ===========================
+//suppliers
+app.get('/suppliers', (req, res) => {
+  const sql = `
+  SELECT * FROM suppliers
+  `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.post('/suppliers', (req, res) => {
+  const sql = `
+  INSERT INTO suppliers (name, kw_price)
+  VALUES (?,?)
+  `;
+  con.query(sql, [req.body.name, req.body.priceKW], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+//===================
+//consumers
 app.get('/consumers', (req, res) => {
   const sql = `
   SELECT * FROM consumers
@@ -30,6 +54,21 @@ app.get('/consumers', (req, res) => {
     if (err) throw err;
     res.send(result);
   });
+});
+
+app.post('/consumers', (req, res) => {
+  const sql = `
+  INSERT INTO consumers (name, surname, electricity_number)
+  VALUES (?,?,?)
+  `;
+  con.query(
+    sql,
+    [req.body.name, req.body.surname, req.body.electricityNum],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
 });
 
 //===================================
