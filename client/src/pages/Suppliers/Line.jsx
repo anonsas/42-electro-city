@@ -2,11 +2,7 @@ import React, { useContext } from 'react';
 import SupplierContext from '../../contexts/SupplierContext';
 
 function Line({ supplier }) {
-  const { setDeleteSupplier } = useContext(SupplierContext);
-
-  const editSupplierHandler = (editSupplier) => {
-    console.log(editSupplier);
-  };
+  const { setDeleteSupplier, setModalData } = useContext(SupplierContext);
 
   return (
     <div key={supplier.id} className="line">
@@ -16,7 +12,7 @@ function Line({ supplier }) {
       </div>
 
       <div className="line__actions">
-        <button type="button" onClick={() => editSupplierHandler(supplier)}>
+        <button type="button" onClick={() => setModalData(supplier)}>
           Edit
         </button>
         <button type="button" onClick={() => setDeleteSupplier(supplier)}>

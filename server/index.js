@@ -55,6 +55,18 @@ app.delete('/suppliers/:id', (req, res) => {
   });
 });
 
+app.put('/suppliers/:id', (req, res) => {
+  const sql = `
+  UPDATE suppliers
+  SET name=?, kw_price=?
+  WHERE id=?
+  `;
+  con.query(sql, [req.body.name, req.body.priceKW, req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 //===================
 //consumers
 app.get('/consumers', (req, res) => {

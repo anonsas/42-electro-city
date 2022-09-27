@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import './Suppliers.scss';
 import axios from 'axios';
 
 import SupplierContext from '../../contexts/SupplierContext';
 import Create from './Create';
 import List from './List';
+import Edit from './Edit';
 
 function Suppliers() {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [suppliers, setSuppliers] = useState(null);
   const [createSupplier, setCreateSupplier] = useState(null);
   const [deleteSupplier, setDeleteSupplier] = useState(null);
+  const [editSupplier, setEditSupplier] = useState(null);
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     axios
@@ -40,10 +44,31 @@ function Suppliers() {
       .catch((error) => alert(error.message));
   }, [deleteSupplier]);
 
+  useEffect(() => {
+    if (editSupplier === null) return;
+    axios
+      .put(`http://localhost:4000/suppliers/${editSupplier.id}`, editSupplier)
+      .then((response) => {
+        setLastUpdate(Date.now());
+        setEditSupplier(null);
+      })
+      .catch((error) => alert(error.message));
+  }, [editSupplier]);
+
   return (
-    <SupplierContext.Provider value={{ suppliers, setCreateSupplier, setDeleteSupplier }}>
+    <SupplierContext.Provider
+      value={{
+        suppliers,
+        setCreateSupplier,
+        setDeleteSupplier,
+        setEditSupplier,
+        modalData,
+        setModalData,
+      }}
+    >
       <Create />
       <List />
+      <Edit />
     </SupplierContext.Provider>
   );
 }
