@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import ConsumerContext from '../../contexts/ConsumerContext';
 
 function Line({ consumer }) {
-  const { setModalData, setDeleteConsumer } = useContext(ConsumerContext);
+  const { setModalData, setModalDeleteData } = useContext(ConsumerContext);
   return (
     <div key={consumer.id} className="line">
       <div className="line__content">
@@ -16,7 +16,7 @@ function Line({ consumer }) {
         <button type="button" onClick={() => setModalData(consumer)}>
           Edit
         </button>
-        <button type="button" onClick={() => setDeleteConsumer(consumer)}>
+        <button type="button" onClick={() => setModalDeleteData(consumer)}>
           Delete
         </button>
       </div>

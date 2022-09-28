@@ -6,6 +6,7 @@ import ConsumerContext from '../../contexts/ConsumerContext';
 import Create from './Create';
 import List from './List';
 import Edit from './Edit';
+import Delete from './Delete';
 
 function Consumers() {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
@@ -14,6 +15,7 @@ function Consumers() {
   const [deleteConsumer, setDeleteConsumer] = useState(null);
   const [editConsumer, setEditConsumer] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [modalDeleteData, setModalDeleteData] = useState(null);
 
   const [supplierList, setSupplierList] = useState(null);
 
@@ -76,11 +78,14 @@ function Consumers() {
         setEditConsumer,
         modalData,
         setModalData,
+        modalDeleteData,
+        setModalDeleteData,
       }}
     >
       <Create />
       <List />
       <Edit />
+      <Delete />
     </ConsumerContext.Provider>
   );
 }

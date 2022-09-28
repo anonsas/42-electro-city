@@ -6,6 +6,7 @@ import SupplierContext from '../../contexts/SupplierContext';
 import Create from './Create';
 import List from './List';
 import Edit from './Edit';
+import Delete from './Delete';
 
 function Suppliers() {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
@@ -14,6 +15,7 @@ function Suppliers() {
   const [deleteSupplier, setDeleteSupplier] = useState(null);
   const [editSupplier, setEditSupplier] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [modalDeleteData, setModalDeleteData] = useState(null);
 
   // CRUD FUNCTIONALITY ==================================
   useEffect(() => {
@@ -65,11 +67,14 @@ function Suppliers() {
         setEditSupplier,
         modalData,
         setModalData,
+        modalDeleteData,
+        setModalDeleteData,
       }}
     >
       <Create />
       <List />
       <Edit />
+      <Delete />
     </SupplierContext.Provider>
   );
 }

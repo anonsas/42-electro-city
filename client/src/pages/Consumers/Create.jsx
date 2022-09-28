@@ -85,6 +85,9 @@ function Create() {
             value={supplier}
             onChange={(e) => setSupplier(e.target.value)}
           >
+            <option value={0} disabled>
+              Choose from list
+            </option>
             {supplierList?.map((supplier) => (
               <option key={supplier.id} value={supplier.id}>
                 {supplier.name}
