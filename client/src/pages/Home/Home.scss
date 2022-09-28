@@ -1,0 +1,12 @@
+.home {
+  margin-top: 10rem;
+
+  display: grid;
+  place-items: center;
+}
+
+.electric-tower {
+  height: 40rem;
+  filter: invert(33%) sepia(26%) saturate(6928%) hue-rotate(1deg) brightness(102%)
+    contrast(105%);
+}

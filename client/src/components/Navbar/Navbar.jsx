@@ -11,11 +11,11 @@ function Navbar() {
         <NavLink to="/" end className="header__nav--link">
           Home
         </NavLink>
-        <NavLink to="/consumers" className="header__nav--link">
-          Consumers
-        </NavLink>
         <NavLink to="/suppliers" className="header__nav--link">
           Suppliers
+        </NavLink>
+        <NavLink to="/consumers" className="header__nav--link">
+          Consumers
         </NavLink>
       </nav>
     </header>

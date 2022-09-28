@@ -19,7 +19,7 @@ function Create() {
       name,
       surname,
       electricityNum,
-      supplier,
+      supplier: parseInt(supplier),
     };
     setCreateConsumer(createData);
 
