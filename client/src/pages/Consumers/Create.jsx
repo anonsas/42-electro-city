@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import ConsumerContext from '../../contexts/ConsumerContext';
 
 function Create() {
-  const { setCreateConsumer } = useContext(ConsumerContext);
+  const { setCreateConsumer, supplierList } = useContext(ConsumerContext);
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [electricityNum, setElectricityNum] = useState('');
-  const [supplier, setSupplier] = useState('');
+  const [supplier, setSupplier] = useState(0);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -20,8 +21,12 @@ function Create() {
       electricityNum,
       supplier,
     };
-
     setCreateConsumer(createData);
+
+    setName('');
+    setSurname('');
+    setElectricityNum('');
+    setSupplier(0);
   };
 
   return (
@@ -72,16 +77,20 @@ function Create() {
 
         {/* SUPPLIER */}
         <div>
-          <label htmlFor="supplier">Supplier:</label>
-          <input
-            type="text"
+          <label htmlFor="supplier">Choose Supplier:</label>
+
+          <select
+            name="supplier"
             id="supplier"
-            className=""
             value={supplier}
             onChange={(e) => setSupplier(e.target.value)}
-            autoComplete="off"
-            required
-          />
+          >
+            {supplierList?.map((supplier) => (
+              <option key={supplier.id} value={supplier.id}>
+                {supplier.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <button type="submit" onClick={formSubmitHandler}>

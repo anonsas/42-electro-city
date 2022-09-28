@@ -81,12 +81,45 @@ app.get('/consumers', (req, res) => {
 
 app.post('/consumers', (req, res) => {
   const sql = `
-  INSERT INTO consumers (name, surname, electricity_number)
-  VALUES (?,?,?)
+  INSERT INTO consumers (name, surname, electricity_number,supplier_id)
+  VALUES (?,?,?,?)
   `;
   con.query(
     sql,
-    [req.body.name, req.body.surname, req.body.electricityNum],
+    [req.body.name, req.body.surname, req.body.electricityNum, req.body.supplier],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
+});
+
+app.delete('/consumers/:id', (req, res) => {
+  const sql = `
+  DELETE FROM consumers
+  WHERE id=?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.put('/consumers/:id', (req, res) => {
+  const sql = `
+  UPDATE consumers
+  SET name=?, surname=?, electricity_number=?, supplier_id=?
+  WHERE id=?
+  `;
+  con.query(
+    sql,
+    [
+      req.body.name,
+      req.body.surname,
+      req.body.electricityNum,
+      req.body.supplier,
+      req.params.id,
+    ],
     (err, result) => {
       if (err) throw err;
       res.send(result);

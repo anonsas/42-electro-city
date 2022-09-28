@@ -15,6 +15,7 @@ function Suppliers() {
   const [editSupplier, setEditSupplier] = useState(null);
   const [modalData, setModalData] = useState(null);
 
+  // CRUD FUNCTIONALITY ==================================
   useEffect(() => {
     axios
       .get('http://localhost:4000/suppliers')

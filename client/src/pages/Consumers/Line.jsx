@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ConsumerContext from '../../contexts/ConsumerContext';
 
 function Line({ consumer }) {
+  const { setModalData, setDeleteConsumer } = useContext(ConsumerContext);
   return (
-    <div key={consumer.id} style={{ display: 'flex', columnGap: '1rem' }}>
-      <p>{consumer.name}</p>
-      <p>{consumer.kw_price}</p>
+    <div key={consumer.id} className="line">
+      <div className="line__content">
+        <p>{consumer.name}</p>
+        <p>{consumer.surname}</p>
+        <p>{consumer.electricity_number}</p>
+        <p>{consumer.supplier_id}</p>
+      </div>
+
+      <div className="line__actions">
+        <button type="button" onClick={() => setModalData(consumer)}>
+          Edit
+        </button>
+        <button type="button" onClick={() => setDeleteConsumer(consumer)}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
