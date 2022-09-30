@@ -23,7 +23,13 @@ function Edit() {
     if (!name || !surname || !electricityNum || !supplier)
       return alert('Please fill in the blanks');
 
-    setEditConsumer({ name, surname, electricityNum, supplier, id: modalData.id });
+    setEditConsumer({
+      name,
+      surname,
+      electricityNum,
+      supplier: parseInt(supplier),
+      id: modalData.id,
+    });
     setModalData(null);
   };
 
@@ -32,7 +38,7 @@ function Edit() {
   return (
     <div className="overlay">
       <form className="modal">
-        <h2>Edit Supplier</h2>
+        <h2>Edit Consumer:</h2>
 
         {/* NAME */}
         <div className="modal__question">

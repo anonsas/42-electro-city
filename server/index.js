@@ -81,7 +81,7 @@ app.get('/consumers', (req, res) => {
 
 app.post('/consumers', (req, res) => {
   const sql = `
-  INSERT INTO consumers (name, surname, electricity_number,supplier_id)
+  INSERT INTO consumers (name, surname, electricity_number, supplier_id)
   VALUES (?,?,?,?)
   `;
   con.query(
@@ -125,6 +125,21 @@ app.put('/consumers/:id', (req, res) => {
       res.send(result);
     }
   );
+});
+
+//===================
+// suppliers and consumers
+app.get('/all', (req, res) => {
+  const sql = `
+  SELECT *, suppliers.id AS supID, suppliers.name AS supName, suppliers.kw_price 
+  FROM suppliers 
+  INNER JOIN consumers
+  ON consumers.supplier_id = suppliers.id
+  `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
 });
 
 //===================================
