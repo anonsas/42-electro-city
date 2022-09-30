@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
   return (
     <header className="header">
-      <img src={images.teliaLogo} alt="logo" className="header__logo" />
+      <h3>sildymo-medziokle.lt</h3>
       <nav className="header__nav">
         <NavLink to="/" end className="header__nav--link">
           Home
@@ -16,6 +16,9 @@ function Navbar() {
         </NavLink>
         <NavLink to="/consumers" className="header__nav--link">
           Consumers
+        </NavLink>
+        <NavLink to="/invoices" className="header__nav--link">
+          Invoices
         </NavLink>
       </nav>
     </header>

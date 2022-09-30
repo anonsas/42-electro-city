@@ -24,9 +24,7 @@ const con = mysql.createConnection({
 // ROUTES ===========================
 //suppliers
 app.get('/suppliers', (req, res) => {
-  const sql = `
-  SELECT * FROM suppliers
-  `;
+  const sql = `SELECT * FROM suppliers`;
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
@@ -70,9 +68,7 @@ app.put('/suppliers/:id', (req, res) => {
 //===================
 //consumers
 app.get('/consumers', (req, res) => {
-  const sql = `
-  SELECT * FROM consumers
-  `;
+  const sql = `SELECT * FROM consumers`;
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
@@ -140,6 +136,31 @@ app.get('/all', (req, res) => {
     if (err) throw err;
     res.send(result);
   });
+});
+
+//===================
+// invoices
+app.get('/invoices', (req, res) => {
+  const sql = `SELECT * FROM bills`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.post('/invoices', (req, res) => {
+  const sql = `
+  INSERT INTO invoices (invoice, kwh, total, consumer_id)
+  VALUES (?,?,?,?)
+  `;
+  con.query(
+    sql,
+    [req.body.invoice, req.body.kwh, req.body.total, req.body.consumerID],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
 });
 
 //===================================
