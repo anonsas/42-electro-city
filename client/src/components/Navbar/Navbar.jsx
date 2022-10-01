@@ -17,8 +17,8 @@ function Navbar() {
         <NavLink to="/consumers" className="header__nav--link">
           Consumers
         </NavLink>
-        <NavLink to="/invoices" className="header__nav--link">
-          Invoices
+        <NavLink to="/bills" className="header__nav--link">
+          Bills
         </NavLink>
       </nav>
     </header>

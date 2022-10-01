@@ -139,8 +139,8 @@ app.get('/all', (req, res) => {
 });
 
 //===================
-// invoices
-app.get('/invoices', (req, res) => {
+// bills
+app.get('/bills', (req, res) => {
   const sql = `SELECT * FROM bills`;
   con.query(sql, (err, result) => {
     if (err) throw err;
@@ -148,9 +148,9 @@ app.get('/invoices', (req, res) => {
   });
 });
 
-app.post('/invoices', (req, res) => {
+app.post('/bills', (req, res) => {
   const sql = `
-  INSERT INTO invoices (invoice, kwh, total, consumer_id)
+  INSERT INTO bills (invoice, kwh, total, consumer_id)
   VALUES (?,?,?,?)
   `;
   con.query(
@@ -161,6 +161,17 @@ app.post('/invoices', (req, res) => {
       res.send(result);
     }
   );
+});
+
+app.delete('/bills/:id', (req, res) => {
+  const sql = `
+  DELETE FROM bills
+  WHERE id=?
+  `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
 });
 
 //===================================

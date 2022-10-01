@@ -1,7 +1,7 @@
 import './App.scss';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import { Home, Suppliers, Consumers, Invoices } from './pages/index';
+import { Home, Suppliers, Consumers, Bills } from './pages/index';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="consumers" element={<Consumers />} />
         <Route path="suppliers" element={<Suppliers />} />
-        <Route path="invoices" element={<Invoices />} />
+        <Route path="bills" element={<Bills />} />
       </Routes>
     </div>
   );
