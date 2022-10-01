@@ -13,6 +13,30 @@ function Bills() {
   const [deleteBill, setDeleteBill] = useState(null);
   const [deleteBillModal, setDeleteBillModal] = useState(null);
 
+  const [supplierList, setSupplierList] = useState(null);
+  const [consumerList, setConsumerList] = useState(null);
+
+  // GET ALL SUPPLIERS FOR SELECT
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/suppliers')
+      .then((response) => {
+        setSupplierList(response.data);
+      })
+      .catch((error) => alert(error.message));
+  }, []);
+
+  // GET ALL CONSUMERS FROM SUPPLIER FOR SELECT
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/consumers')
+      .then((response) => {
+        setConsumerList(response.data?.map((consumer) => ({ ...consumer, show: false })));
+      })
+      .catch((error) => alert(error.message));
+  }, []);
+
+  // CRUD FUNCTIONALITY - BILLS =====================
   useEffect(() => {
     axios
       .get('http://localhost:4000/bills')
@@ -44,8 +68,6 @@ function Bills() {
       .catch((error) => alert(error.message));
   }, [deleteBill]);
 
-  console.log(billList);
-
   return (
     <BillContext.Provider
       value={{
@@ -54,6 +76,9 @@ function Bills() {
         setDeleteBill,
         deleteBillModal,
         setDeleteBillModal,
+        supplierList,
+        consumerList,
+        setConsumerList,
       }}
     >
       <Create />

@@ -27,7 +27,7 @@ function Consumers() {
       .catch((error) => alert(error.message));
   }, []);
 
-  // CRUD FUNCTIONALITY ==================================
+  // CRUD FUNCTIONALITY - CONSUMERS =====================
   useEffect(() => {
     axios
       .get('http://localhost:4000/consumers')

@@ -155,7 +155,7 @@ app.post('/bills', (req, res) => {
   `;
   con.query(
     sql,
-    [req.body.invoice, req.body.kwh, req.body.total, req.body.consumerID],
+    [req.body.invoice, req.body.kwh, req.body.total, req.body.consumer_id],
     (err, result) => {
       if (err) throw err;
       res.send(result);
