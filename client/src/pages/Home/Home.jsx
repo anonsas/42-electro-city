@@ -15,8 +15,6 @@ function Home() {
       .catch((error) => alert(error.message));
   }, []);
 
-  console.log(list);
-
   const structuredList = (data) => {
     const newData = new Map();
     data.forEach((obj) => {

@@ -8,8 +8,6 @@ function List() {
   const [supplier, setSupplier] = useState('0');
   const [sortBy, setSortBy] = useState('default');
 
-  console.log(billList);
-
   useEffect(() => {
     if (supplier === '0') {
       setBillList((prevState) => prevState?.map((bill) => ({ ...bill, show: true })));
