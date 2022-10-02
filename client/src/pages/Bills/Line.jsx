@@ -7,8 +7,12 @@ function Line({ bill }) {
   return (
     <div className="line">
       <div className="line__content">
-        <p>{bill.supName}</p>
-        <p>{bill.invoice}</p>
+        <p>
+          <b>{bill.supName}</b>
+        </p>
+        <p>
+          <b>{bill.invoice}</b>
+        </p>
         <p>{bill.kwh} kWh</p>
         <p>{bill.total} &euro;</p>
         <p>

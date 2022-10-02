@@ -1,12 +1,12 @@
 const con = require('../database').databaseConnection;
 
 module.exports.getAllBills = (req, res) => {
-  const sql = `SELECT bills.*, consumers.name, consumers.surname, suppliers.name as supName
+  const sql = `SELECT bills.*, cons.name, cons.surname, sup.name AS supName, sup.id AS supID
               FROM bills
-              INNER JOIN consumers
-              ON bills.consumer_id = consumers.id
-              INNER JOIN suppliers
-              ON consumers.supplier_id = suppliers.id`;
+              INNER JOIN consumers AS cons
+              ON bills.consumer_id = cons.id
+              INNER JOIN suppliers AS sup
+              ON cons.supplier_id = sup.id`;
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);

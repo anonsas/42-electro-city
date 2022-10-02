@@ -16,8 +16,6 @@ function Bills() {
   const [supplierList, setSupplierList] = useState(null);
   const [consumerList, setConsumerList] = useState(null);
 
-  console.log(billList);
-
   // GET ALL SUPPLIERS FOR SELECT
   useEffect(() => {
     axios
@@ -43,7 +41,7 @@ function Bills() {
     axios
       .get('http://localhost:4000/bills')
       .then((response) => {
-        setBillList(response.data);
+        setBillList(response.data.map((bill) => ({ ...bill, show: true })));
       })
       .catch((error) => alert(error.message));
   }, [lastUpdate]);
@@ -74,6 +72,7 @@ function Bills() {
     <BillContext.Provider
       value={{
         billList,
+        setBillList,
         setCreateBill,
         setDeleteBill,
         deleteBillModal,

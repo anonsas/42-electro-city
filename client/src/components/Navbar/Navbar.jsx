@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
   return (
     <header className="header">
-      <h3>sildymo-medziokle.lt</h3>
+      <h3>elektros-medziokle.lt</h3>
       <nav className="header__nav">
         <NavLink to="/" end className="header__nav--link">
           Home
