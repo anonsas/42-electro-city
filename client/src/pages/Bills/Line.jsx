@@ -5,12 +5,15 @@ function Line({ bill }) {
   const { setDeleteBillModal } = useContext(BillContext);
 
   return (
-    <div key={bill.id} className="line">
+    <div className="line">
       <div className="line__content">
+        <p>{bill.supName}</p>
         <p>{bill.invoice}</p>
-        <p>{bill.kwh} eur/kWh</p>
-        <p>{bill.total}</p>
-        <p>{bill.consumer_id}</p>
+        <p>{bill.kwh} kWh</p>
+        <p>{bill.total} &euro;</p>
+        <p>
+          {bill.name} {bill.surname}
+        </p>
       </div>
 
       <div className="line__actions">

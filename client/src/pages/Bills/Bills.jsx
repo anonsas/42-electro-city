@@ -16,6 +16,8 @@ function Bills() {
   const [supplierList, setSupplierList] = useState(null);
   const [consumerList, setConsumerList] = useState(null);
 
+  console.log(billList);
+
   // GET ALL SUPPLIERS FOR SELECT
   useEffect(() => {
     axios

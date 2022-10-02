@@ -17,7 +17,12 @@ function Create() {
     if (!invoice || !kwh || !total || consumer === '0')
       return alert('Please fill in the blanks');
 
-    const createData = { invoice, kwh, total, consumer_id: consumer };
+    const createData = {
+      invoice,
+      kwh: parseInt(kwh),
+      total: parseFloat(total),
+      consumer_id: parseInt(consumer),
+    };
     setCreateBill(createData);
 
     setSupplier('0');

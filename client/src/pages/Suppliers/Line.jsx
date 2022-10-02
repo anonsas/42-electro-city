@@ -5,7 +5,7 @@ function Line({ supplier }) {
   const { setModalData, setModalDeleteData } = useContext(SupplierContext);
 
   return (
-    <div key={supplier.id} className="line">
+    <div className="line">
       <div className="line__content">
         <p>{supplier.name}</p>
         <p>{supplier.kw_price} eur/kWh</p>

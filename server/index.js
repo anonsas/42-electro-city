@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const mysql = require('mysql');
 const PORT = 4000;
 
 app.use(cors());
@@ -12,120 +11,11 @@ app.use(
   })
 );
 
-// DATABASE CONNECTION================
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'electricity_suppliers',
-});
-//===================================
+const con = require('./database').databaseConnection;
 
 // ROUTES ===========================
-//suppliers
-app.get('/suppliers', (req, res) => {
-  const sql = `SELECT * FROM suppliers`;
-  con.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.post('/suppliers', (req, res) => {
-  const sql = `
-  INSERT INTO suppliers (name, kw_price)
-  VALUES (?,?)
-  `;
-  con.query(sql, [req.body.name, req.body.priceKW], (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.delete('/suppliers/:id', (req, res) => {
-  const sql = `
-  DELETE FROM suppliers
-  WHERE id=?
-  `;
-  con.query(sql, [req.params.id], (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.put('/suppliers/:id', (req, res) => {
-  const sql = `
-  UPDATE suppliers
-  SET name=?, kw_price=?
-  WHERE id=?
-  `;
-  con.query(sql, [req.body.name, req.body.priceKW, req.params.id], (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-//===================
-//consumers
-app.get('/consumers', (req, res) => {
-  const sql = `SELECT * FROM consumers`;
-  con.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.post('/consumers', (req, res) => {
-  const sql = `
-  INSERT INTO consumers (name, surname, electricity_number, supplier_id)
-  VALUES (?,?,?,?)
-  `;
-  con.query(
-    sql,
-    [req.body.name, req.body.surname, req.body.electricityNum, req.body.supplier],
-    (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    }
-  );
-});
-
-app.delete('/consumers/:id', (req, res) => {
-  const sql = `
-  DELETE FROM consumers
-  WHERE id=?
-  `;
-  con.query(sql, [req.params.id], (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.put('/consumers/:id', (req, res) => {
-  const sql = `
-  UPDATE consumers
-  SET name=?, surname=?, electricity_number=?, supplier_id=?
-  WHERE id=?
-  `;
-  con.query(
-    sql,
-    [
-      req.body.name,
-      req.body.surname,
-      req.body.electricityNum,
-      req.body.supplier,
-      req.params.id,
-    ],
-    (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    }
-  );
-});
-
-//===================
 // suppliers and consumers
-app.get('/all', (req, res) => {
+app.get('/', (req, res) => {
   const sql = `
   SELECT *, suppliers.id AS supID, suppliers.name AS supName, suppliers.kw_price 
   FROM suppliers 
@@ -138,43 +28,16 @@ app.get('/all', (req, res) => {
   });
 });
 
-//===================
-// bills
-app.get('/bills', (req, res) => {
-  const sql = `SELECT * FROM bills`;
-  con.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
+// IMPORTED ROUTES ==================
+const SuppliersRoutes = require('./routes/Suppliers');
+app.use('/suppliers', SuppliersRoutes);
 
-app.post('/bills', (req, res) => {
-  const sql = `
-  INSERT INTO bills (invoice, kwh, total, consumer_id)
-  VALUES (?,?,?,?)
-  `;
-  con.query(
-    sql,
-    [req.body.invoice, req.body.kwh, req.body.total, req.body.consumer_id],
-    (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    }
-  );
-});
+const ConsumersRoutes = require('./routes/Consumers');
+app.use('/consumers', ConsumersRoutes);
 
-app.delete('/bills/:id', (req, res) => {
-  const sql = `
-  DELETE FROM bills
-  WHERE id=?
-  `;
-  con.query(sql, [req.params.id], (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
+const BillsRoutes = require('./routes/Bills');
+app.use('/bills', BillsRoutes);
 
-//===================================
 app.listen(PORT, () => {
   console.log(`Server started on PORT: ${PORT}`);
 });

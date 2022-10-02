@@ -8,7 +8,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/all')
+      .get('http://localhost:4000/')
       .then((response) => {
         setList(structuredList(response.data));
       })

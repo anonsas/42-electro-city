@@ -4,7 +4,7 @@ import ConsumerContext from '../../contexts/ConsumerContext';
 function Line({ consumer }) {
   const { setModalData, setModalDeleteData, supplierList } = useContext(ConsumerContext);
   return (
-    <div key={consumer.id} className="line">
+    <div className="line">
       <div className="line__content">
         <p>{consumer.name}</p>
         <p>{consumer.surname}</p>
