@@ -41,7 +41,7 @@ function Bills() {
     axios
       .get('http://localhost:4000/bills')
       .then((response) => {
-        setBillList(response.data.map((bill) => ({ ...bill, show: true })));
+        setBillList(response.data.map((bill, i) => ({ ...bill, show: true, row: i })));
       })
       .catch((error) => alert(error.message));
   }, [lastUpdate]);
